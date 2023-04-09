@@ -6,6 +6,8 @@ require_once __DIR__ . '/../bootstrap.php';
 
 /** @var array $config */
 
+use Subb98\BotHelpTestTask\Queue\AmqpPublisher;
+use Subb98\BotHelpTestTask\Queue\MessageDto;
 use Workerman\Worker;
 
 $serverDsn = sprintf('websocket://%s:%d', $config['ws_server_host'], $config['ws_server_port']);
@@ -32,11 +34,14 @@ $wsServer->onConnect = function ($connection) {
 };
 
 $wsServer->onMessage = function ($connection, $data) {
-    $connection->send('Hello ' . $data);
+    $dataArr = json_decode($data, true);
+    $messageDto = new MessageDto($dataArr['client'], $dataArr['event']);
+    AmqpPublisher::sendMessage($messageDto);
+    $connection->send('Receive ' . $data);
 };
 
 $wsServer->onClose = function ($connection) {
     echo "Connection closed\n";
 };
 
-Worker::runAll();
+$wsServer::runAll();

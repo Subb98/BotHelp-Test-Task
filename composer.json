@@ -28,6 +28,12 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
+        "ext-pcntl": "*",
+        "ext-sockets": "*",
+        "php-amqplib/php-amqplib": "^3.5",
+        "symfony/console": "^6.2",
+        "symfony/dependency-injection": "^6.2",
+        "symfony/process": "^6.2",
         "workerman/workerman": "^4.1"
     },
     "autoload": {
