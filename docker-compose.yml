@@ -13,4 +13,20 @@ services:
       WS_SERVER_SSL_CERT: "/usr/local/src/docker/php/cert/localhost.crt"
       WS_SERVER_SSL_KEY: "/usr/local/src/docker/php/cert/localhost.key"
       WS_SERVER_BASIC_AUTH: ""
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
+      RABBITMQ_USER: ${COMPOSE_PROJECT_NAME:-bothelp-test-task}
+      RABBITMQ_PASSWORD: ${COMPOSE_PROJECT_NAME:-bothelp-test-task}
+      RABBITMQ_VHOST: "/"
     command: ["/usr/local/bin/php", "/usr/local/src/public/server.php", "start"]
+    depends_on:
+      - rabbitmq
+    restart: "on-failure"
+  rabbitmq:
+    build: docker/rabbitmq
+    container_name: ${COMPOSE_PROJECT_NAME:-bothelp-test-task}.rabbitmq
+    ports:
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${COMPOSE_PROJECT_NAME:-bothelp-test-task}
+      RABBITMQ_DEFAULT_PASS: ${COMPOSE_PROJECT_NAME:-bothelp-test-task}

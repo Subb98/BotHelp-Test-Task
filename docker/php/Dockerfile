@@ -11,8 +11,12 @@ EXPOSE 8000
 
 CMD ["/usr/local/bin/php", "/usr/local/src/public/server.php", "start"]
 
+RUN apk add --no-cache \
+    linux-headers
+
 RUN docker-php-ext-install \
-    pcntl
+    pcntl \
+    sockets
 
 RUN curl https://getcomposer.org/composer.phar > /usr/local/bin/composer \
     && chmod a+x /usr/local/bin/composer
