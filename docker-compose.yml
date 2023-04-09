@@ -1,0 +1,16 @@
+services:
+  php:
+    build: docker/php
+    container_name: ${COMPOSE_PROJECT_NAME:-bothelp-test-task}.php
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/usr/local/src/
+    environment:
+      WS_SERVER_HOST: "0.0.0.0"
+      WS_SERVER_PORT: "8000"
+      WS_SERVER_USE_SSL: "0"
+      WS_SERVER_SSL_CERT: "/usr/local/src/docker/php/cert/localhost.crt"
+      WS_SERVER_SSL_KEY: "/usr/local/src/docker/php/cert/localhost.key"
+      WS_SERVER_BASIC_AUTH: ""
+    command: ["/usr/local/bin/php", "/usr/local/src/public/server.php", "start"]
