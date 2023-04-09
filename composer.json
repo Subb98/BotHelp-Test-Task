@@ -1,0 +1,42 @@
+{
+    "name": "subb98/bothelp-test-task",
+    "description": "Test task for Backend Developer position at BotHelp",
+    "type": "project",
+    "keywords": [
+        "test",
+        "task",
+        "project",
+        "application",
+        "example",
+        "php",
+        "backend",
+        "docker",
+        "websocket"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladislav Subbotin",
+            "email": "subb98@gmail.com",
+            "role": "Owner"
+        }
+    ],
+    "homepage": "https://github.com/Subb98/BotHelp-Test-Task",
+    "support": {
+        "issues": "https://github.com/Subb98/BotHelp-Test-Task/issues"
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {
+        "workerman/workerman": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Subb98\\BotHelpTestTask\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
