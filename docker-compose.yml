@@ -18,7 +18,7 @@ services:
       RABBITMQ_USER: ${COMPOSE_PROJECT_NAME:-bothelp-test-task}
       RABBITMQ_PASSWORD: ${COMPOSE_PROJECT_NAME:-bothelp-test-task}
       RABBITMQ_VHOST: "/"
-    command: ["/usr/local/bin/php", "/usr/local/src/bin/server", "start"]
+    entrypoint: "docker/php/entrypoint.sh"
     depends_on:
       - rabbitmq
     restart: "on-failure"

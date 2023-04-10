@@ -34,7 +34,7 @@ class GenerateClientMessagesCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument('outputCsvFile', InputArgument::REQUIRED, 'Output CSV file');
+        $this->addArgument('outputCsvFile', InputArgument::OPTIONAL, 'Output CSV file');
         $this->addArgument('clientsCount', InputArgument::OPTIONAL, 'Count of clients (default: 1000)');
         $this->addArgument('eventsCount', InputArgument::OPTIONAL, 'Count of events (default: 10000)');
     }

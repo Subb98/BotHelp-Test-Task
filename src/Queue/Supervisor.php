@@ -18,7 +18,7 @@ class Supervisor
 
     public int $reloadSignal = 1;
 
-    public string $outputLogFile = '';
+    public string $outputLogFile;
 
     /** @var Process[] Массив запущенных подпроцессов */
     private array $processes;
@@ -117,5 +117,11 @@ class Supervisor
     public function log(string $message): void
     {
         echo $message . PHP_EOL;
+        $fh = fopen($this->outputLogFile, 'a');
+        if (false === $fh) {
+            return;
+        }
+        fputs($fh, $message);
+        fclose($fh);
     }
 }

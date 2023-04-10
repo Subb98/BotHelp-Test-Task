@@ -10,4 +10,5 @@ require_once __DIR__ . '/../bootstrap.php';
 use Subb98\BotHelpTestTask\Queue\Supervisor;
 
 $supervisor = new Supervisor();
+$supervisor->outputLogFile = $config['root_dir'] . '/data/supervisor.log';
 $supervisor->startSupervisor();

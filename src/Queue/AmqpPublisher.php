@@ -22,11 +22,15 @@ class AmqpPublisher
             $channel->queue_declare($queueName, false, true, false, false);
             $channel->queue_bind($queueName, self::$exchangerName, 1);
         }
+
+        $channel->close();
+        $connection->close();
     }
 
     /**
      * @param MessageDto $messageDto
      * @return void
+     * @throws \Exception
      */
     public static function sendMessage(MessageDto $messageDto): void
     {
@@ -37,5 +41,6 @@ class AmqpPublisher
         $channel->basic_publish($message, self::$exchangerName, $messageDto->routingKey);
 
         $channel->close();
+        $connection->close();
     }
 }

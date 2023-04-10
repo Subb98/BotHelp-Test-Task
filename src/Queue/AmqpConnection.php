@@ -10,7 +10,6 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 final class AmqpConnection
 {
-    private static ?AbstractConnection $instance = null;
     private static string $host;
     private static int $port;
     private static string $user;
@@ -33,20 +32,6 @@ final class AmqpConnection
 
     public static function getInstance(): AbstractConnection
     {
-        /*if (null === self::$instance) {
-            self::$instance = new AMQPStreamConnection(
-                self::$host,
-                self::$port,
-                self::$user,
-                self::$password,
-                self::$vhost
-            );
-        }
-        if (false === self::$instance->isConnected()) {
-            self::$instance->reconnect();
-        }
-
-        return self::$instance;*/
         return new AMQPStreamConnection(
             self::$host,
             self::$port,

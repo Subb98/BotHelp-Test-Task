@@ -16,16 +16,41 @@
 
 ![](https://i.imgur.com/saTA9Hk.jpg)
 
+## Установка
+```shell
+# Склонировать репозиторий
+git clone git@github.com:Subb98/BotHelp-Test-Task.git
+
+# Перейти в директорию проекта
+cd BotHelp-Test-Task
+
+# Выдать доступ на выполнение для файлов в директории bin
+chmod -R a+x bin/
+
+# Запустить сборку проекта
+docker compose up --build -d
+# Примечание: если у вас старая версия Docker Compose, используйте команду с разделителем '-', docker-compose
+
+# Проверить, что сборка успешна и контейнеры запущены
+docker compose ps
+
+# Дальнейшие команды выполнять из контейнера, для удобства, можно просто войти в него
+docker exec -it bothelp-test-task.php sh
+```
+
 ## Использование
 ```shell
 # Запустить генерирование клиентских сообщений:
-./bin/console app:generate-client-messages 'client_messages.csv'
+./bin/console app:generate-client-messages 'data/client_messages.csv'
 
 # Запустить отправку сгенерированных сообщений на Websocket server:
-./bin/console app:send-client-messages 'client_messages.csv' start
+./bin/console app:send-client-messages 'data/client_messages.csv' start
 
 # Запустить супервизор, который, в свою очередь, запустит получателей сообщений:
 ./bin/supervisor
+
+# Логи работы супервизора будут находиться в data/supervisor.log, по ним можно будет проверить,
+# выполняется ли порядок обработки событий для каждого конкретного клиента
 ```
 
 ## Примечание
