@@ -10,12 +10,15 @@ use Workerman\Worker;
 
 class WebsocketClient
 {
-    public static function sendMessagesFromCsvFile(string $inputCsvFile): void
+    public function __construct(private readonly string $dsn)
     {
-        $worker = new Worker(); // TODO: исп. внедрение зависимости
+    }
+
+    public function sendMessagesFromCsvFile(string $inputCsvFile): void
+    {
+        $worker = new Worker();
         $worker->onWorkerStart = function () use ($inputCsvFile) {
-            // TODO: исп. внедрение зависимости
-            $wsConnection = new AsyncTcpConnection('ws://php:8000'); // TODO: забирать из конфига
+            $wsConnection = new AsyncTcpConnection($this->dsn);
             $wsConnection->onConnect = function ($connection) use ($inputCsvFile) {
                 $fh = fopen($inputCsvFile, 'r');
                 if (false === $fh) {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Subb98\BotHelpTestTask\Websocket;
 
-use Subb98\BotHelpTestTask\Queue\AmqpPublisher;
+use Subb98\BotHelpTestTask\Queue\Interfaces\AmqpPublisherInterface;
 use Subb98\BotHelpTestTask\Queue\MessageDto;
 use Workerman\Worker;
 
@@ -16,6 +16,7 @@ class WebsocketServer
         private readonly bool $useSsl,
         private readonly string $sslCert,
         private readonly string $sslKey,
+        private readonly AmqpPublisherInterface $amqpPublisher
     ) {
     }
 
@@ -34,7 +35,7 @@ class WebsocketServer
             ];
         }
 
-        $wsServer = new Worker($serverDsn, $context); // TODO: исп. внедрение зависимости
+        $wsServer = new Worker($serverDsn, $context);
 
         if (true === $this->useSsl) {
             $wsServer->transport = 'ssl';
@@ -47,8 +48,8 @@ class WebsocketServer
         $wsServer->onMessage = function ($connection, $data) {
             $dataArr = json_decode($data, true);
             $messageDto = new MessageDto($dataArr['client'], $dataArr['event']);
-            AmqpPublisher::sendMessage($messageDto); // TODO: исп. внедрение зависимости
-            $connection->send('Receive ' . $data); // TODO: исп. внедрение зависимости
+            $this->amqpPublisher->sendMessage($messageDto);
+            $connection->send('Receive ' . $data);
         };
 
         $wsServer->onClose = function ($connection) {

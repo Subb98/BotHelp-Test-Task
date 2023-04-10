@@ -7,6 +7,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 /** @var array $config */
 
+use Subb98\BotHelpTestTask\Queue\AmqpPublisher;
 use Subb98\BotHelpTestTask\Websocket\WebsocketServer;
 
 $websocketServer = new WebsocketServer(
@@ -14,6 +15,7 @@ $websocketServer = new WebsocketServer(
     $config['ws_server_port'],
     $config['ws_server_use_ssl'],
     $config['ws_server_ssl_cert'],
-    $config['ws_server_ssl_key']
+    $config['ws_server_ssl_key'],
+    new AmqpPublisher()
 );
 $websocketServer->startWebsocketServer();
