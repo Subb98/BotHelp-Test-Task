@@ -1,0 +1,19 @@
+#!/usr/local/bin/php
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../bootstrap.php';
+
+/** @var array $config */
+
+use Subb98\BotHelpTestTask\Websocket\WebsocketServer;
+
+$websocketServer = new WebsocketServer(
+    $config['ws_server_host'],
+    $config['ws_server_port'],
+    $config['ws_server_use_ssl'],
+    $config['ws_server_ssl_cert'],
+    $config['ws_server_ssl_key']
+);
+$websocketServer->startWebsocketServer();

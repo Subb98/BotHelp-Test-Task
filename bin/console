@@ -9,7 +9,6 @@ require_once __DIR__ . '/../bootstrap.php';
 
 use Subb98\BotHelpTestTask\Command\GenerateClientMessagesCommand;
 use Subb98\BotHelpTestTask\Command\SendClientMessagesCommand;
-use Subb98\BotHelpTestTask\Command\StartWebsocketServerCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -20,11 +19,4 @@ $containerBuilder->compile();
 $application = new Application();
 $application->add(new GenerateClientMessagesCommand($config['root_dir'] . '/client_messages.csv'));
 $application->add(new SendClientMessagesCommand($config['root_dir'] . '/client_messages.csv'));
-$application->add(new StartWebsocketServerCommand(
-    $config['ws_server_host'],
-    $config['ws_server_port'],
-    $config['ws_server_use_ssl'],
-    $config['ws_server_ssl_cert'],
-    $config['ws_server_ssl_key']
-));
 $application->run();

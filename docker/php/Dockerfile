@@ -9,7 +9,7 @@ WORKDIR "/usr/local/src"
 
 EXPOSE 8000
 
-CMD ["/usr/local/bin/php", "/usr/local/src/public/server.php", "start"]
+CMD ["/usr/local/bin/php", "/usr/local/src/bin/server", "start"]
 
 RUN apk add --no-cache \
     linux-headers
