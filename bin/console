@@ -9,6 +9,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 use Subb98\BotHelpTestTask\Command\GenerateClientMessagesCommand;
 use Subb98\BotHelpTestTask\Command\SendClientMessagesCommand;
+use Subb98\BotHelpTestTask\Command\StartConsumerCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -19,4 +20,5 @@ $containerBuilder->compile();
 $application = new Application();
 $application->add(new GenerateClientMessagesCommand($config['root_dir'] . '/client_messages.csv'));
 $application->add(new SendClientMessagesCommand($config['root_dir'] . '/client_messages.csv'));
+$application->add(new StartConsumerCommand());
 $application->run();

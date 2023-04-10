@@ -1,0 +1,13 @@
+#!/usr/local/bin/php
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../bootstrap.php';
+
+/** @var array $config */
+
+use Subb98\BotHelpTestTask\Queue\Supervisor;
+
+$supervisor = new Supervisor();
+$supervisor->startSupervisor();
