@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Subb98\BotHelpTestTask\Queue;
 
 use PhpAmqpLib\Message\AMQPMessage;
+use Subb98\BotHelpTestTask\Queue\Interfaces\AmqpPublisherInterface;
+use Subb98\BotHelpTestTask\Queue\Interfaces\MessageDtoInterface;
 
-class AmqpPublisher
+class AmqpPublisher implements AmqpPublisherInterface
 {
     private static string $exchangerName = 'ch-router';
     private static string $exchangerType = 'x-consistent-hash';
@@ -28,11 +30,11 @@ class AmqpPublisher
     }
 
     /**
-     * @param MessageDto $messageDto
+     * @param MessageDtoInterface $messageDto
      * @return void
      * @throws \Exception
      */
-    public static function sendMessage(MessageDto $messageDto): void
+    public function sendMessage(MessageDtoInterface $messageDto): void
     {
         $connection = AmqpConnection::getInstance();
         $channel = $connection->channel();

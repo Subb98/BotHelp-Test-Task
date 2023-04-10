@@ -31,7 +31,8 @@ class SendClientMessagesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        WebsocketClient::sendMessagesFromCsvFile($this->inputCsvFile);
+        $websocketClient = new WebsocketClient('ws://php:8000');
+        $websocketClient->sendMessagesFromCsvFile($this->inputCsvFile);
         return Command::SUCCESS;
     }
 }

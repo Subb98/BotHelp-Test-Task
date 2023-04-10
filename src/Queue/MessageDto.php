@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Subb98\BotHelpTestTask\Queue;
 
-readonly class MessageDto
+use Subb98\BotHelpTestTask\Queue\Interfaces\MessageDtoInterface;
+
+readonly class MessageDto implements MessageDtoInterface
 {
     public readonly int $client;
     public readonly int $event;
