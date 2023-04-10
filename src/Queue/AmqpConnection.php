@@ -8,6 +8,11 @@ use DomainException;
 use PhpAmqpLib\Connection\AbstractConnection;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
+/**
+ * Не успеваю проработать вопрос с возможными ошибками
+ * при работе с одним коннектом, поэтому не является синглтоном по сути,
+ * класс служит больше глобальным объектом с настройками подключения
+ */
 final class AmqpConnection
 {
     private static string $host;
